@@ -67,7 +67,7 @@ pipeline {
 					docker.withRegistry('https://registry-1.docker.io', 'jenkins-dockerhub-token') {
 						docker_image = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
 						docker_image.push()
-						docker_image.push('latest') || true
+						docker_image.push('latest') 
 					}
 				}
 			}
@@ -89,7 +89,7 @@ pipeline {
 			steps {
 				script {
 					sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-					sh "docker rmi ${IMAGE_NAME}:latest"
+					sh "docker rmi ${IMAGE_NAME}:latest" || true
 				}
 			}
 		}
