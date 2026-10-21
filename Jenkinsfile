@@ -4,6 +4,14 @@ pipeline {
 		jdk 'Java21'
 		maven 'Maven3'
 	}
+	environment {
+		APP_NAME = "register-app-pipeline"
+		RELEASE = "1.0.0"
+		DOCKER_USER = "antarctic672"
+		IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}
+		IMAGE_TAG = "${RELEASE} - ${BUILD_NUMBER}"
+
+	
 	stages{
 		stage("Cleanup Workspace"){
 			steps {
@@ -47,6 +55,19 @@ pipeline {
 				script {
 					timeout(time: 5, unit: 'MINUTES') {
            	 			waitForQualityGate abortPipeline: true
+					}
+				}
+			}
+		}
+
+
+		stage("Build & Push Docker Image") {
+			steps {
+				script {
+					docker.withRegistry('https://registry-1.docker.io', 'dockerhub-credentials') {
+						docker_image = docker.build("${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}")
+						docker_image.push()
+						docker_image.push('latest')
 					}
 				}
 			}
