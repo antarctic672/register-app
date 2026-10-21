@@ -67,7 +67,7 @@ pipeline {
 					docker.withRegistry('https://registry-1.docker.io', 'jenkins-dockerhub-token') {
 						docker_image = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
 						docker_image.push()
-						docker_image.push('latest')
+						docker_image.push('latest') || true
 					}
 				}
 			}
