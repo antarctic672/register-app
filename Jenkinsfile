@@ -64,7 +64,7 @@ pipeline {
 		stage("Build & Push Docker Image") {
 			steps {
 				script {
-					docker.withRegistry('https://registry-1.docker.io', 'dockerhub-credentials') {
+					docker.withRegistry('https://registry-1.docker.io', 'jenkins-dockerhub-token') {
 						docker_image = docker.build("${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}")
 						docker_image.push()
 						docker_image.push('latest')
