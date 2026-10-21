@@ -99,11 +99,11 @@ pipeline {
 			steps {
 				withCredentials([
 					string(
-						credentialsId: 'jenkins-api-token'
+						credentialsId: 'jenkins-api-token',
 						variable: 'JENKINS_API_TOKEN'
 					),
 					string(
-						credentialsId: 'gitops-trigger-token'
+						credentialsId: 'gitops-trigger-token',
 						variable: 'GITOPS_TRIGGER_TOKEN'
 					)
 				]) {
