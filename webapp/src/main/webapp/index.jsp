@@ -33,6 +33,6 @@
 
    <h1> Thank You, and have a Good Day! </h1>
    <br>
-   <h1> Happy Learning, Dear friends! </h1>
+   <h1> Happy Learning! </h1>
    	   
 </form>
